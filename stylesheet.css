@@ -1,0 +1,19 @@
+#Überschrift {
+    text-align: center;
+}
+
+#Unterüberschrift {
+    text-align: center;
+}
+
+body {
+    background-color: lightblue;
+}
+
+#map {
+    margin-left: auto;
+    margin-right: auto;
+    height: 500px;
+    width: 500px;
+    border: 5px solid #555;
+}
