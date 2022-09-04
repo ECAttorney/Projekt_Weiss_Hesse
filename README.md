@@ -9,11 +9,11 @@ Funktionen dieser Seite:
       
                   - Gebirge werden mittels einer geojson datei als Textfeld oder per Datei
                               - Fehlerüberprüfung machen, ob diese Datei valide ist
-                              - Diese Gebirge sollen dann mittels Leaflet Draw auf der Karte hinzugefügt werden (entweder Punkt oder Polygon, aber würde sagen wir nehmen                                 Punkte)
+                              - Diese Gebirge sollen dann mittels Leaflet Draw auf der Karte hinzugefügt werden (entweder Punkt oder Polygon, aber würde sagen wir nehmen Punkte)
                               
                   - Attribute sollen über ein Formular(?) angegeben werden und als Popup angezeigt werden.
                               - Die Attribute sind Name, Höhe, Wikipedia URL, Beschreibung
-                                      - Die Beschreibung soll mittels Wikipedia API rausgesnipped werden. Falls es keine Beschreibung bzw. Artikel gibt: "keine                                                   Information vorhanden"
+                                      - Die Beschreibung soll mittels Wikipedia API rausgesnipped werden. Falls es keine Beschreibung bzw. Artikel gibt: "keine Information vorhanden"
                   
                   - Gebirge in MongoDB speichern und diese sollen bearbeitbar sein
                                       
@@ -34,3 +34,8 @@ Funktionen dieser Seite:
       
                   - Startseite mit Erklärung und Impressum
                   - Gut lesbar für Handys
+                  
+      - KP OB OPTIONAL
+      
+                  - Wetterverhältnisse anzeigen für Gebirge
+                  - Knopf "Wetterverhältnisse anzeigen" mit OpenWeather API
