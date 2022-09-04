@@ -16,25 +16,59 @@
 
 <body>
 
+<!-- Hier sind die Überschriften -->
+
+<div id = 'Überschriften'>
+
     <h1 id = 'Überschrift'>Abschlussprojekt von Luca Hesse und Darian Weiss</h1>
     <h2 id = 'Unterüberschrift'>Kartenbasierte Webanwendung zum Einsehen, Bearbeiten, Löschen und Hinzufügen von Gebirgen</h2>
 
-    <div id="map"></div>
+</div>
 
-    <script>
+<!-------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+<!-- Karte -->
+
+<div id="map"></div>
+
+<br/>
+
+<!-------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+<!-- Button -->
+
+<button id = 'inputJson'> Use this button to select a GeoJSON-file from your computer</button>
+
+<br/>
+<br/>
+
+<!-------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+<!-- Textfeld -->
+
+<textarea id = 'JSONText' placeholder="input your GeoJSON here...."></textarea>
+
+<!-------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+<!-- Script -->
+
+<script>
     
-        var map = L.map('map').setView([51.505, -0.09], 13);
+        var map = L.map('map').setView([52.520008,13.404954], 3);
 
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
         attribution: '© OpenStreetMap'
         }).addTo(map);
-        
-        
-    
-    
-    </script>
 
+</script>
+
+<!-------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+
+<!-- Impressum, was natürlich noch auf eine andere Seite kommt -->
+
+<div id = 'Impressum'>
 
     <h1>Impressum</h1>
 
@@ -47,5 +81,9 @@
     <h3>Kontakt</h3>
     <p>Luca: lhesse@uni-muenster.de</p>
     <p>Darian: dweiss1@uni-muenster.de</p>
+
+<!-------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+</div>
 </body>
 </html>

@@ -1,3 +1,6 @@
+#Überschriften {
+    font-family: American Typewriter, serif;
+}
 #Überschrift {
     text-align: center;
 }
@@ -8,6 +11,7 @@
 
 body {
     background-color: lightblue;
+    text-align: center;
 }
 
 #map {
@@ -16,4 +20,37 @@ body {
     height: 500px;
     width: 500px;
     border: 5px solid #555;
+    border-style: ridge;
+}
+
+#Impressum {
+    text-align: center;
+    
+
+}
+
+#inputJson {
+  background-color: #4CAF50;
+  border: 2px solid #555;
+  border-style: ridge;
+  color: white;
+  height: 50px;
+  width: 505px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  
+  
+}
+
+#JSONText {
+    border: 2px solid #555;
+    border-style: ridge;
+    height: 50px;
+    width: 500px;
+    font-size: 16px;
+    text-align: center;
+    
+    
 }
