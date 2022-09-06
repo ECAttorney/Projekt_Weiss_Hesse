@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="author" content="Darian Weiss, Luca Hesse">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="stylesheet" href="stylesheet.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
    integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
@@ -11,6 +12,7 @@
    <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
    integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
    crossorigin=""></script>
+   <script defer src="script.js"></script>
     <title>Europas Gebirge</title>
 </head>
 
@@ -30,7 +32,10 @@
 <!-- Karte -->
 
 <div id="map"></div>
-<div id = 'table'>
+
+<br/>
+
+<div id = 'table1'>
     <table border="1"> 
         <tr>
           <th>Gebirge</th>
@@ -52,8 +57,8 @@
         </tr>
       </table>
 </div>
-<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 
+<br/>
 
 <!-------------------------------------------------------------------------------------------------------------------------------------------------------------->
 
@@ -72,6 +77,10 @@
 
 <!-------------------------------------------------------------------------------------------------------------------------------------------------------------->
 
+<div id = 'uploadform'>
+    <h1>Select your GeoJSON-file</h1> <br/>
+    <input type="file" id="uploadfield">
+</div>
 <!-- Script -->
 
 <script>
