@@ -44,6 +44,7 @@ inputJson.addEventListener('click', function(){
                         //testing 
                         console.log('GEIL ALTER');
                         console.log(point);
+                        addMarker(point);
                         
 
                         
@@ -82,7 +83,16 @@ function isJsonString(str) {
 
                 return true;
 
-            }
+}
+
+function addMarker(point){
+
+    let x = point.geometry.coordinates[1];
+    let y = point.geometry.coordinates[0];
+    
+    var marker = L.marker([x, y]).addTo(map);
+    marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
+}
         
             function addMarker(point){
 
