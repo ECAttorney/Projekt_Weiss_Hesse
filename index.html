@@ -131,35 +131,6 @@
 
 </script>
 
-<script>
-  L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="http://osm.org/copyright%22%3EOpenStreetMap</a> contributors'
-  }).addTo(map);
-  // FeatureGroup is to store editable layers
-  var drawnItems = new L.FeatureGroup();
-  var drawControl = new L.Control.Draw({
-    draw: {
-      rectangle: false,
-      polygon: false,
-      marker: true,
-      circle: false,
-      polyline: false,
-      circlemarker: false
-    },
-    edit: {
-      featureGroup: drawnItems
-    }
-  });
-map.on(L.Draw.Event.CREATED, (e) => {
-    var type = e.layerType;
-    var layer = e.layer;
-    boundingbox = layer.toGeoJSON().geometry.coordinates;
-    drawnItems.addLayer(layer);
-    map.addLayer(layer);
-  })
-  map.addLayer(drawnItems)
-  map.addControl(drawControl)
-</script>
 <!-------------------------------------------------------------------------------------------------------------------------------------------------------------->
 
 
