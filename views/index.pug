@@ -1,57 +1,10 @@
-doctype html
-html
-  head
-    meta(charset="UTF-8")
-    meta(name="author", content="Darian Weiss, Luca Hesse")
-    meta(name="viewport", content="width=device-width, initial-scale=1.0")
-    meta(http-equiv="X-UA-Compatible", content="IE=edge")
-    link(rel="stylesheet", href="/stylesheets/stylesheet.css")
-    link(rel="stylesheet", href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css", integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ==", crossorigin=)
-    link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.2/leaflet.draw.css")
-    script(src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.2/leaflet.draw.js")
-    script(src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js", integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ==", crossorigin=)
-    link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.2/leaflet.draw.css")
-    script(src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.2/leaflet.draw.js")
-    script(defer, src="/javascripts/script.js")
-    title Europas Gebirge
-  body
-    // Hier sind die Überschriften
-    #Ueberschriften
-      h1#Ueberschrift Abschlussprojekt von Luca Hesse und Darian Weiss
-      h2#Unterueberschrift Kartenbasierte Webanwendung zum Einsehen, Bearbeiten, Löschen und Hinzufügen von Gebirgen
-      h1 Startseite
-    //
-      ------------------------------------------------------------------------------------------------------------------------------------------------------------>
-      
-      <!-- Karte
-    #map
-    br
-    #table1
-      table(border="1")
-        tr
-          th Gebirge
-          th Höhe
-          th Wikipedia-URL
-          th Beschreibung
-        tr
-          td Gebirge 1
-          td 34344 Meter
-          td www.krasseGebirge.com
-          td Mega Geil dieses Gebirge
-        tr
-          td Gebirge 2
-          td 3444 Meter
-          td www.hahahahah.com
-          td Das ist voll das krasse Gebirge
-    br
-    button#inputJson.button-3  Use this button to select a GeoJSON-file from your computer
-    br
-    br
-    textarea#JSONText(placeholder="input your GeoJSON here....")
-    #uploadform
-      h1 Select your GeoJSON-file
-      br
-      input#uploadfield(type="file")
+extends layout
+block content
+  title Europas Gebirge
+  #Ueberschriften
+    h1#Ueberschrift Abschlussprojekt von Luca Hesse und Darian Weiss
+    h2#Unterueberschrift Kartenbasierte Webanwendung zum Einsehen, Bearbeiten, Löschen und Hinzufügen von Gebirgen
+    h1 Startseite
     script.
       var map = L.map('map').setView([52.520008,13.404954], 3);
       
@@ -95,5 +48,12 @@ html
     nav.navbar.navbar-expand-sm
       a.navbar-brand(href="#")
       #navbarMenu.collapse.navbar-collapse
-        a.button-3(href="/users", role="button") Impressum
-        | &amp;nbsp
+        a.button-3(href="/search", role="button") Route Berechnen
+        |  
+        a.button-3(href="/add", role="button") Hinzufügen
+        |  
+        a.button-3(href="/change", role="button") Bearbeiten
+        |  
+        a.button-3(href="/list", role="button") Ansehen
+        |  
+        a.button-4(href="/impressum", role="button") Impressum

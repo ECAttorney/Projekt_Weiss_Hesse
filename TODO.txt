@@ -1,0 +1,10 @@
+TO DO:
+- Tabelle bei list.pug machen (mit HOVER)
+- Route berechnen bei search.pug aus der API einbinden
+- Bei Add wenn man was hinzufügt muss es in der Datenbank erscheinen
+- Bearbeiten & Löschen
+- Wikipedia API
+- Kulti!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+- Popup fixen
+- Erklärung auf Startseite schreiben
+(- Wetterverhältnisse)

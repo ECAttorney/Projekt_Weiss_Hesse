@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  h1= title
+  hr
+  nav.navbar.navbar-expand-sm
+  a.navbar-brand(href="#")
+  #navbarMenu.collapse.navbar-collapse
+    a.button-4(href="/", role="button") Startseite
+    |  
+    a.button-3(href="/add", role="button") Hinzufügen
+    |  
+    a.button-3(href="/search", role="button") Route Berechnen
+    |  
+    a.button-3(href="/list", role="button") Ansehen
+    |  
+    a.button-4(href="/impressum", role="button") Impressum

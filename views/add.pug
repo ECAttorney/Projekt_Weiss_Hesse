@@ -1,0 +1,23 @@
+extends layout
+block content
+ button#inputJson.button-3  Use this button to select a GeoJSON-file from your computer
+ br
+ br
+ textarea#JSONText(placeholder='input your GeoJSON here....')
+ #uploadform
+  h1 Select your GeoJSON-file
+  br
+  input#uploadfield(type='file')
+  hr
+  nav.navbar.navbar-expand-sm
+  a.navbar-brand(href="#")
+  #navbarMenu.collapse.navbar-collapse
+    a.button-4(href="/", role="button") Startseite
+    |  
+    a.button-3(href="/search", role="button") Route Berechnen
+    |  
+    a.button-3(href="/change", role="button") Bearbeiten
+    |  
+    a.button-3(href="/list", role="button") Ansehen
+    |  
+    a.button-4(href="/impressum", role="button") Impressum

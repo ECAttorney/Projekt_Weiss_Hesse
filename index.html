@@ -22,7 +22,7 @@
 
 <body>
 
-<!-- Hier sind die Überschriften -->
+
 <div id = 'Überschriften'>
 
     <h1 id = 'Überschrift'>Abschlussprojekt von Luca Hesse und Darian Weiss</h1>
@@ -30,9 +30,7 @@
     <h1>Startseite</h1>
 </div>
 
-<!-------------------------------------------------------------------------------------------------------------------------------------------------------------->
 
-<!-- Karte -->
 
 <div id="map"></div>
 
@@ -63,9 +61,7 @@
 
 <br/>
 
-<!-------------------------------------------------------------------------------------------------------------------------------------------------------------->
 
-<!-- Button --->
 
 <button id = 'inputJson' class="button-3"> Use this button to select a GeoJSON-file from your computer</button>
 
@@ -73,19 +69,16 @@
 <br/>
 <br/>
 
-<!-------------------------------------------------------------------------------------------------------------------------------------------------------------->
 
-<!-- Textfeld --->
 
 <textarea id = 'JSONText' placeholder="input your GeoJSON here...."></textarea>
 
-<!-------------------------------------------------------------------------------------------------------------------------------------------------------------->
 
 <div id = 'uploadform'>
     <h1>Select your GeoJSON-file</h1> <br/>
     <input type="file" id="uploadfield">
 </div>
-<!-- Script --->
+
 
 <script>
     
@@ -100,7 +93,7 @@
         L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="http://osm.org/copyright%22%3EOpenStreetMap</a> contributors'
   }).addTo(map);
-  // FeatureGroup is to store editable layers
+  
   var drawnItems = new L.FeatureGroup();
   var drawControl = new L.Control.Draw({
     draw: {
@@ -131,10 +124,7 @@
 
 </script>
 
-<!-------------------------------------------------------------------------------------------------------------------------------------------------------------->
 
-
-<!-- Impressum, was natürlich noch auf eine andere Seite kommt --->
 </br>
 <hr>
 <nav class="navbar navbar-expand-sm">
@@ -146,7 +136,7 @@
 </nav>
 
 
-<!-------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
 
 </div>
 </body>
