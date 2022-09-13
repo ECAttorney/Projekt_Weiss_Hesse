@@ -1,12 +1,36 @@
 extends layout 
-
-
 block content
   h1= title
   br
   #map
   span#resultlist
-  script. 
+    #navbarMenu.collapse.navbar-collapse
+    nav.navbar.navbar-expand-sm
+    a.navbar-brand(href="#")
+      a.button-4(href="/", role="button") Startseite
+      |  
+      a.button-3(href="/add", role="button") Hinzufügen
+      |  
+      a.button-3(href="/change", role="button") Bearbeiten
+      |  
+      a.button-3(href="/search", role="button") Route Berechnen
+      |  
+      a.button-4(href="/impressum", role="button") Impressum
+  #mydata
+    b Liste aller in der Datenbank gespeicherten Berge
+    table#myTableData(border='1' cellpadding='2')
+      tr
+        td
+          b Name
+        td
+          b Koordinaten
+        td
+          b Höhe
+        td
+          b Link
+        td
+          b Beschreibung   
+  script.
     var map = L.map("map").setView([49.845363, 9.905964], 4);
 
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -35,63 +59,23 @@ block content
     {
     console.log(geojson[i].geometry.coordinates)
     addMarker(geojson[i])
+    console.log(geojson[i])
+    var bergname = geojson[i].properties.name 
+    var bergkoordinaten = geojson[i].geometry.coordinates
+    var berghoehe = geojson[i].properties.altitude
+    var berglink = geojson[i].properties.url
+    var bergbeschreibung = geojson[i].properties.description
+    var table = document.getElementById("myTableData");
+             
+    var rowCount = table.rows.length;
+    var row = table.insertRow(rowCount);
+             
+   
+    row.insertCell(0).innerHTML= bergname;
+    row.insertCell(1).innerHTML= bergkoordinaten;
+    row.insertCell(2).innerHTML= berghoehe;
+    row.insertCell(3).innerHTML= berglink;
+    row.insertCell(4).innerHTML= bergbeschreibung;
+    
     }
-    const table = document.createElement("TABLE");
-
-
-    geojson.forEach((item,j = 0) => {
-    let c = item.geometry.coordinates;
-    let p = item.properties;
-    j++;
-
- 
-    let row = table.insertRow(-1);
-    let cell0 = row.insertCell(0);
-    let cell1 = row.insertCell(1);
-    let cell2 = row.insertCell(2);
-    let cell3 = row.insertCell(3);
-    let cell4 = row.insertCell(4);
-    let cell5 = row.insertCell(5);
-    let cell6 = row.insertCell(6);
-
-  
-    cell0.innerHTML = j;
-    cell1.innerHTML = p.name;
-    cell2.innerHTML = p.hoehe;
-    cell3.innerHTML = p.beschreibung;
-    cell4.innerHTML = Math.round(c[0] 100) / 100; 
-    cell5.innerHTML = Math.round(c[1] * 100) / 100; 
-    cell6.innerHTML = p.url;
-    });
-
-    console.log(table);
-  #table1
-    table(border="1")
-       tr
-         th Gebirge
-         th Höhe
-         th Wikipedia-URL
-         th Beschreibung
-       tr
-         td Gebirge 1
-         td 34344 Meter
-         td www.krasseGebirge.com
-         td Mega Geil dieses Gebirge
-       tr
-         td Gebirge 2
-         td 3444 Meter
-         td www.hahahahah.com
-         td Das ist voll das krasse Gebirge
-    hr
-    nav.navbar.navbar-expand-sm
-    a.navbar-brand(href="#")
-    #navbarMenu.collapse.navbar-collapse
-      a.button-4(href="/", role="button") Startseite
-      |  
-      a.button-3(href="/add", role="button") Hinzufügen
-      |  
-      a.button-3(href="/change", role="button") Bearbeiten
-      |  
-      a.button-3(href="/search", role="button") Route Berechnen
-      |  
-      a.button-4(href="/impressum", role="button") Impressum
+        

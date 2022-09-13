@@ -1,3 +1,7 @@
+
+const jsdom = require("jsdom");
+const { JSDOM } = jsdom;
+global.document = new JSDOM('www').window.document;
 var express = require("express");
 var router = express.Router();
 const MongoClient = require("mongodb").MongoClient;
@@ -7,267 +11,169 @@ const gjv = require("geojson-validation");
 const fs = require("fs");
 const axios = require("axios");
 
-const url = "mongodb://127.0.0.1:27017"; // connection URL
-const client = new MongoClient(url, { useUnifiedTopology: true }); // mongodb client
-const dbName = "mydatabase"; // database name
-const collectionName = "mountain"; // collection name
+const url = 'mongodb://127.0.0.1:27017' // connection URL
+const client = new MongoClient(url) // mongodb client
+const dbName = 'ourdatabase' // database name
+const collectionName = 'gebirge' // collection name
 
-//global attribute
-let description = "";
+let uploadfield = document.querySelector('#'+'uploadfield')
+//let uploadfield = document.getElementById('uploadfield')
+console.log(uploadfield);
+let inputJson = document.getElementById('inputJson');
+console.log(inputJson);
+let JSONText = document.getElementById('JSONText');
 
 
-//GET home page
-router.get("/", function (req, res, next) {
-  res.render("add", { title: "Gebirge hinzufügen" });
+router.get('/', function(req, res, next) 
+{
+  res.render('add', { title: 'Addition Page' });
 });
 
-
-// added Mountain through textfield
-router.post("/new_mountain_textfield", function (req, res, next) {
-
-  // try parsing of input text
+/** */
+router.post('/JSONText', function(req, res, next) 
+{
   try {
-    JSON.parse(req.body.textfield);
+    JSON.parse(req.body.JSONText);
   }
   catch (err) {
-    res.render("notification", {
-      title: "Gebirge konnte nicht hinzugefügt werden. Überprüfe GeoJSON-Syntax!",
-    });
+   // res.render("notification", {
+   //   title: "Falsche Eingabe! Bitte nur einzelne Features, keine FeatureCollections!",
+    //});
   }
-  let mountain = JSON.parse(req.body.textfield);
+  let mountain = JSON.parse(req.body.JSONText);
+  //getWikipediaDescription(mountain.properties.url);
 
-  if (validateFormat(mountain, res)) {
+  console.log("A new poi has been added through the user interface")
 
-    getWikiSnippet(mountain.properties.url);
-
-    //waits for getWikiSnippet to resolve promise
-    setTimeout(function () {
-      mountain.properties.description = description;
-
-      // connect to the mongodb database and afterwards, insert one the new element
-      client.connect(function (err) {
-
-        console.log("Connected successfully to server");
-        console.log("A new Mountain has been added");
-        console.log(mountain);
-
-        const db = client.db(dbName);
-        const collection = db.collection(collectionName);
-
-        // Insert the document in the database
-        collection.insertOne(mountain, function (err, result) {
-          console.log(
-            `Inserted ${result.insertedCount} document into the collection`);
-          res.render("notification", { title: "Gebirge hinzugefügt!", data: JSON.stringify(mountain) });
-        });
-      });
-    }, 1500);
-  }
-});
-
-
-// added Mountain through fileupload
-router.post("/new_mountain_file", function (req, res, next) {
-
-  fs.readFile(req.body.file, "utf8", function (err, data) {
-
-    // try parsing of input text
-    try {
-      JSON.parse(data);
-    }
-    catch (err) {
-      res.render("notification", {
-        title: "Gebirge konnte nicht hinzugefügt werden. Überprüfe GeoJSON-Syntax!",
-      });
-    }
-    let mountain = JSON.parse(data);
-
-    if (validateFormat(mountain, res)) {
-
-      getWikiSnippet(mountain.properties.url);
-
-      //waits for getWikiSnippet to resolve promise
+  console.log(req) // show the data that has been passed through the post query
+  //let poi = {}
+  //poi.poiname = JSON.parse(req.body.properties.name
+  //poi.coordinates = req.body.longlat
+      // Hier wird mit Timeout gearbeitet, damit die Beschreibung gegeben ist
       setTimeout(function () {
         mountain.properties.description = description;
-
-        // connect to the mongodb database
+  
+        // Verbindung zur Datenbank wird hergestellt und der Punkt hinzugefügt
         client.connect(function (err) {
-
+  
           console.log("Connected successfully to server");
-          console.log("A new Mountain has been added");
-          console.log(mountain);
-
+  
+          // abrufen der DB und ihrere Kollektion
           const db = client.db(dbName);
           const collection = db.collection(collectionName);
-
-          // Insert the document in the database
+  
+          // Einfügen in die Datenbank
           collection.insertOne(mountain, function (err, result) {
             console.log(
               `Inserted ${result.insertedCount} document into the collection`);
-            res.render("notification", { title: "Gebirge hinzugefügt!", data: JSON.stringify(mountain) });
+          //  res.render("notification", { title: "Gebirge hinzugefügt!", data: JSON.stringify(mountain) });
           });
         });
       }, 1500);
-    }
-  });
+  //addNewPOItoDB(client, dbName, collectionName, mountain, res)
+
 });
+// retrieve all elements from the database, and pass the results as input data for the search page
+async function addNewPOItoDB(client, dbName, collectionName, poi, res) 
+{
 
+  await client.connect()
 
-// added Mountain through Leaflet
-router.post("/new_mountain_leaflet", function (req, res, next) {
+  console.log('Connected successfully to server')
 
-  //Checks if input is correct
-  if (req.body.mountain == "" || req.body.altitude == "" || req.body.long == "" || req.body.lat == "") {
-    res.render("notification", {
-      title: "Gebirge konnte nicht hinzugefügt werden. Überprüfe Eingabe!",
-    });
-  } else {
+  const db = client.db(dbName)
 
-    getWikiSnippet(req.body.url);
+  const collection = db.collection(collectionName)
 
-    //waits for getWikiSnippet to resolve promise
-    setTimeout(function () {
+  collection.insertOne(poi) // see https://www.mongodb.com/docs/drivers/node/current/usage-examples/insertOne/
+  console.log("New poi inserted in the database");
 
-      //Feature Mountain
-      let mountain = {
-        "type": "Feature",
-        "properties": {
-          "shape": "Marker",
-          "name": req.body.mountain,
-          "altitude": req.body.altitude,
-          "url": req.body.url,
-          "description": description
-        },
-        "geometry": {
-          "type": "Point",
-          "coordinates": [req.body.long, req.body.lat]
-        },
-      };
-
-      // connect to the mongodb database and afterwards, insert one the new element
-      client.connect(function (err) {
-
-        console.log("Connected successfully to server");
-        console.log("A new Mountain has been added");
-        console.log(mountain);
-
-        const db = client.db(dbName);
-        const collection = db.collection(collectionName);
-
-        // Insert the document in the database
-        collection.insertOne(mountain, function (err, result) {
-          console.log(
-            `Inserted ${result.insertedCount} document into the collection`);
-          res.render("notification", { 
-            title: "Gebirge hinzugefügt!", 
-            data: JSON.stringify(mountain) });
-        });
-      });
-    }, 1500);
-  };
-});
-
-
-/**
- * Validates the parameters of the geojson file
- * @param {*} file 
- * @returns 
- */
-function validateFormat(geojson, res) {
-
-  //Properties
-  if (geojson.properties == null) {
-    res.render("notification", {
-      title: "Gebirge konnte nicht hinzugefügt werden. Überprüfe Angabe von Properties!",
-    });
-    return false;
-    //Name
-  } else if (geojson.properties.name == null || geojson.properties.name == "") {
-    res.render("notification", {
-      title: "Gebirge konnte nicht hinzugefügt werden. Überprüfe Attribut Name!",
-    });
-    return false;
-    //Altitude
-  } else if (geojson.properties.altitude == null || geojson.properties.altitude == "") {
-    res.render("notification", {
-      title: "Gebirge konnte nicht hinzugefügt werden. Überprüfe Attribut Höhe!",
-    });
-    return false;
-    // url
-  } else if (geojson.properties.url == null || geojson.properties.url == "") {
-    res.render("notification", {
-      title: "Gebirge konnte nicht hinzugefügt werden. Überprüfe Attribut URL!",
-    });
-    return false;
-    //description
-  } else if (geojson.properties.description == null || geojson.properties.description != "") {
-    res.render("notification", {
-      title: "Gebirge konnte nicht hinzugefügt werden. Überprüfe Attribut Beschreibung!",
-    });
-    return false;
-    //geometry
-  } else if (geojson.geometry == null) {
-    res.render("notification", {
-      title: "Gebirge konnte nicht hinzugefügt werden. Überprüfe Angabe von Koordinaten!",
-    });
-    return false;
-    //coordinates
-  } else if (geojson.geometry.coordinates[0] == null || geojson.geometry.coordinates[1] == null || geojson.geometry.coordinates[0] == "" || geojson.geometry.coordinates[1] == "") {
-    res.render("notification", {
-      title: "Gebirge konnte nicht hinzugefügt werden. Überprüfe Koordinaten!",
-    });
-    return false;
-
-  } else {
-    return true;
-  }
-};
-
-
-/**
- * if url is valide and a wikipedia-url
- * then sets @param description to the snippet from Wikipedia with the WikipediaAPI
- * otherwise sets @param description to "Keine Informationen verfügbar"
- * @param {*} url 
- */
-function getWikiSnippet(url) {
-
-  if (!isValidUrl(url) || url.indexOf("wikipedia") === -1) {
-
-    description = "Keine Informationen verfügbar";
-
-  } else {
-
-    let urlArray = url.split("/");
-    let title = urlArray[urlArray.length - 1];
-
-    axios.get(
-      "https://de.wikipedia.org/w/api.php?format=json&exintro=1&action=query&prop=extracts&explaintext=1&exsentences=1&origin=*&titles=" + title
-    ).then(function (response) {
-      const pageKey = Object.keys(response.data.query.pages)[0];
-      description = response.data.query.pages[pageKey].extract;
-    });
-  }
+  // pass the data added as input for the notification page
+  res.render('add_notification', {title: "Addition Completed", newpoi: poi})
 }
 
 
-/**
- * Validation of URLs
- * https://stackoverflow.com/questions/5717093/check-if-a-javascript-string-is-a-url
- * @param {*} string 
- * @returns true for vaild url
- *          false for unvaild url
- */
-function isValidUrl(string) {
-  let url;
+/** 
+uploadfield.addEventListener('change', function(){
 
-  try {
-    url = new URL(string);
-  } catch (_) {
-    return false;
-  }
+    // if a file was selected
+    if (uploadfield.files.length > 0) 
+    {
+    var reader = new FileReader() // File reader to read the file 
 
-  return url.protocol === "http:" || url.protocol === "https:";
+    reader.readAsText(uploadfield.files[0]); // read the uploaded file
+    
+    // event listener, if the reader has read the file
+    reader.addEventListener('load', function() {
+        
+        var result = JSON.parse(reader.result)
+        var str = JSON.stringify(result, undefined, 4);
+        JSONText.value = str;
+    })
 }
+})
 
+inputJson.addEventListener('click', function(){
+    
+    let JSON_input = document.getElementById("JSONText")
+
+                // testing 
+                console.log(JSON_input);
+
+                // Here I check, whether the input is viable as a JSON/GeoJSON object
+                if(isJsonString(JSON_input.value)){
+
+                    // Here I check, whether the GeoJSON is a point, because only than i can calculate properly
+                    if(JSON.parse(JSON_input.value).geometry.type == "Point"){
+
+                        let point = JSON.parse(document.getElementById("JSONText").value);
+
+                        //testing 
+                        console.log('GEIL ALTER');
+                        console.log(point);
+                        //addMarker(point);
+                        AddNewPOItoDB;
+
+                        
+                    }
+                    else{
+
+                        // Error!
+                        alert("WRONG INPUT! PLEASE TRY AGAIN");
+
+                    }      
+
+                }
+                else{
+
+                    // Error!
+                    alert("WRONG INPUT! PLEASE TRY AGAIN");
+
+                }
+
+
+            })
+
+function isJsonString(str) {
+
+                try{
+
+                JSON.parse(str);
+
+                } 
+
+                catch (e){
+
+                return false;
+
+                }
+
+                return true;
+
+}
+*/
 module.exports = router;
+
+/**
+ * POST Befehl für einen durch das Eingabefeld vom Nutzer hinzugefügtes Gebirge in GeoJSON Format als Text
+ */

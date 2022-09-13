@@ -4,7 +4,27 @@ TO DO:
 - Bei Add wenn man was hinzufügt muss es in der Datenbank erscheinen
 - Bearbeiten & Löschen
 - Wikipedia API
-- Kulti!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 - Popup fixen
-- Erklärung auf Startseite schreiben
-(- Wetterverhältnisse)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+(gym)
