@@ -1,8 +1,31 @@
 extends layout
 
 block content
-  h1= title
-  hr
+  header
+    // add a bootstrap navbar
+    // Documentation about navbars at https://getbootstrap.com/docs/5.2/components/navbar/
+  nav#myfirstnavbar.navbar.navbar-expand-md.navbar-dark.bg-primary.mb-4
+    .container-fluid
+      a.navbar-brand(href='#')= title
+      i.bi.bi-camera.me-3
+      button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#navbarCollapse' aria-controls='navbarCollapse' aria-expanded='false' aria-label='Toggle navigation')
+        span.navbar-toggler-icon
+
+  h3 Welcome to the #{title}
+  br
+  br 
+  // adapter from https://getbootstrap.com/docs/4.0/components/forms/#horizontal-form
+  .container
+    .row.justify-content-md-center
+      form(action="/change/deletepoi" method="delete")
+        fieldset
+          .form-group.row.mb-1
+            label.col-sm-2.col-form-label(for="poiname") Enter POI Name you want to totally destroy once and for all.
+            .col-sm-6
+              input#poiname.form-control(type="text" name="pname" placeholder="Enter POI Name")
+          .form-group.row.mb-1
+           button.btn.btn-primary.mb-3(type="submit")#loeschknopf Send 
+
   nav.navbar.navbar-expand-sm
   a.navbar-brand(href="#")
   #navbarMenu.collapse.navbar-collapse

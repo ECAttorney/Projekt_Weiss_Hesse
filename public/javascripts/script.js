@@ -2,11 +2,23 @@
 
 let uploadfield = document.getElementById("uploadfield")
 let inputJson = document.getElementById('inputJson');
-let JSONText = document.getElementById('JSONText');
+let textarea = document.getElementById('textarea');
+/** 
+let loeschen = document.getElementById('loeschknopf');
 
+loeschen.addEventListener('click', function(){
+    submitData();
+})
 
-
-
+async function submitData(){
+    let id = req.body.textarea;
+    fetch(url + id, {
+     method: 'DELETE',
+})
+    .then(res => res.text()) // or res.json()
+    .then(res => console.log(res))
+  }
+*/
 uploadfield.addEventListener('change', function(){
 
     // if a file was selected
@@ -21,7 +33,7 @@ uploadfield.addEventListener('change', function(){
         
         var result = JSON.parse(reader.result)
         var str = JSON.stringify(result, undefined, 4);
-        JSONText.value = str;
+        textarea.value = str;
     })
 }
 })
