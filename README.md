@@ -17,5 +17,5 @@ Das Anzeigen aller Einträge funktioniert als Tabellenform und mit Popups auf de
 Durch Klicken auf eine Zeile in der Tabelle wird der Kartenausschnitt auf den entsprechenden Bereich gezoomed.
 Das  Navigieren zwischen verschiedenen Seiten funktioniert übder die Buttons unten.
 
-Ohne Docker funktioniert die Anwendung, wenn man die Webseite per Docker startet, sind nicht alle Funktionen und Seiten aufrufbar.
+Ohne Docker funktioniert die Anwendung. Wenn man die Webseite per Docker startet, sind nicht alle Funktionen und Seiten aufrufbar.
             wir vermuten es liegt an den async await functions

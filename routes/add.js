@@ -16,33 +16,36 @@ router.get('/', function (req, res, next) {
   });
 });
 
-/*  */
+/* Aus Aufgabe 6 */
 router.post('/newpoi', function (req, res, next) {
-  console.log("A new poi has been added through the user interface")
-
+  console.log("A new mountain has been added through the user interface")
   console.log(req) // show the data that has been passed through the post query
   //let poi = {}
   let poi = JSON.parse(req.body.textarea);
   //poi.poiname = req.body.properties
   //poi.coordinates = req.body.longlat
   console.log(poi)
-  addNewPOItoDB(client, dbName, collectionName, poi, res)
+  addNewBergtoDB(client, dbName, collectionName, poi, res)
   getWikipediaDescription(req.body.url);
 })
 
-
+/**
+ * fuegt einen neuen Berg in die Datenbank ein. Analog zu Aufgabe 6(POIs hinzufuegen)
+ * @param {*} client Client (siehe oben)
+ * @param {*} dbName Name der Datenbank in der der Berg gespeichert werden soll
+ * @param {*} collectionName Name der Collection in der der Berg gespeichert werden soll
+ * @param {*} poi Berg als geojson
+ * @param {*} res result
+ */
 // retrieve all elements from the database, and pass the results as input data for the search page
-async function addNewPOItoDB(client, dbName, collectionName, poi, res) {
+async function addNewBergtoDB(client, dbName, collectionName, poi, res) {
 
   await client.connect()
-
   console.log('Connected successfully to server')
-
+  
   const db = client.db(dbName)
-
   const collection = db.collection(collectionName)
-
-
+  
   collection.insertOne(poi) // see https://www.mongodb.com/docs/drivers/node/current/usage-examples/insertOne/
   console.log("New poi inserted in the database");
 
@@ -54,6 +57,11 @@ async function addNewPOItoDB(client, dbName, collectionName, poi, res) {
 
 }
 
+/**
+ * prueft, ob der uebergebene string eine gueltige url ist. Teil der Wikipedia-API, die leider nicht richtig funktioniert.
+ * @param {*} string zu pruefender string
+ * @returns 
+ */
 function isValidHttpUrl(string) {
   let url;
 
@@ -67,7 +75,7 @@ function isValidHttpUrl(string) {
 }
 
 /**
- * Checkt ob eine URL eine "richtige" URL ist und ob es sich um eine Wikipedia URL handelt
+ * ruft "isValidHttpUrl" auf und prueft zusaetzlich ob es sich um eine wikipedia url handelt. Teil der Wikipedia-API, die leider nicht richtig funktioniert.
  * @param {*} url 
  */
 function getWikipediaDescription(url) {

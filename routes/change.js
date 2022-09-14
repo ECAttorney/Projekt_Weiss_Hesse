@@ -30,7 +30,15 @@ router.post("/deleteOne", function (req, res, next) {
   }
 });
 
-// source: https://www.mongodbtutorial.org/mongodb-crud/mongodb-deleteone/
+/**
+ * entfernt einen berg aus der datenbank. Funktioniert nicht richtig.
+ * @source Quelle: https://www.mongodbtutorial.org/mongodb-crud/mongodb-deleteone/
+ * @param {*} req request
+ * @param {*} client Client (siehe oben)
+ * @param {*} dbName Name der Datenbank aus der der Berg entfernt werden soll
+ * @param {*} collectionName Name der Collection aus der der Berg entfernt werden soll
+ * @param {*} res result
+ */
 async function deleteMountains(req, client, dbName, collectionName, res) {
 
   await client.connect()
@@ -53,35 +61,13 @@ async function deleteMountains(req, client, dbName, collectionName, res) {
   })
 }
 
-
-// retrieve all elements from the database, and pass the results as input data for the search page
-async function removePOIfromDB(client, dbName, collectionName, poi, res) {
-
-  await client.connect()
-
-  console.log('Connected successfully to server')
-
-  const db = client.db(dbName)
-
-  const collection = db.collection(collectionName)
-  console.log(poi)
-
-  collection.deleteOne({
-    'properties.name': poi.properties.name
-  })
-
-  console.log("1 document deleted")
-
-  console.log("poi removed from the database")
-
-  // pass the data added as input for the notification page
-  res.render('delete_notification', {
-    title: "Löschen erfolgt",
-    newpoi: poi
-  })
-
-}
-
+/**
+ * gibt alle berge aus der datenbank zurueck. Teil der Delete-Funktionalität die nicht richtig funktioniert.
+ * @param {*} client Client (siehe oben)
+ * @param {*} dbName Name der Datenbank 
+ * @param {*} collectionName Name der Collection
+ * @param {*} res result
+ */
 async function getMountains(client, dbName, collectionName, res) 
 {
 

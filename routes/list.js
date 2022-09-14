@@ -8,6 +8,7 @@ const client = new MongoClient(url);
 const dbName = "ourdatabase";
 const collectionName = "gebirge";
 
+/* Addition home page. */
 router.get('/', function (req, res, next) {
   client.connect(function (err) {
     assert.equal(null, err);

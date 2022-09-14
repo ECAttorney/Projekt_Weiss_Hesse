@@ -30,23 +30,6 @@ body {
 
 }
 
-/*
-#inputJson {
-  background-color: #4CAF50;
-  border: 2px solid #555;
-  border-style: ridge;
-  color: white;
-  height: 50px;
-  width: 505px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  
-  
-}
-*/
-
 #JSONText {
     border: 2px solid #555;
     border-style: ridge;
@@ -93,6 +76,7 @@ table {
 
   /*
   Template von .button-3 class von https://getcssscan.com/css-buttons-examples
+  Bereits in Aufgabe 6 benutzt
   */
   .button-3 {
     appearance: none;
@@ -118,8 +102,7 @@ table {
     vertical-align: middle;
     white-space: nowrap;
   }
-
-    
+ 
   .button-3:focus:not(:focus-visible):not(.focus-visible) {
     box-shadow: none;
     outline: none;
@@ -146,6 +129,9 @@ table {
     box-shadow: rgba(20, 70, 32, .2) 0 1px 0 inset;
   }
 
+   /*
+  analog zu button-3, nur Farbe veraendert
+  */
   .button-4 {
     appearance: none;
     background-color: #3a3d3b;
@@ -171,7 +157,6 @@ table {
     white-space: nowrap;
   }
 
-    
   .button-4:focus:not(:focus-visible):not(.focus-visible) {
     box-shadow: none;
     outline: none;
