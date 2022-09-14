@@ -1,17 +1,7 @@
 extends layout
 
 block content
-  header
-    // add a bootstrap navbar
-    // Documentation about navbars at https://getbootstrap.com/docs/5.2/components/navbar/
-  nav#myfirstnavbar.navbar.navbar-expand-md.navbar-dark.bg-primary.mb-4
-    .container-fluid
-      a.navbar-brand(href='#')= title
-      i.bi.bi-camera.me-3
-      button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#navbarCollapse' aria-controls='navbarCollapse' aria-expanded='false' aria-label='Toggle navigation')
-        span.navbar-toggler-icon
-
-  h3 Welcome to the #{title}
+  h1= title
   br
   br 
   // adapter from https://getbootstrap.com/docs/4.0/components/forms/#horizontal-form
@@ -20,9 +10,9 @@ block content
       form(action="/change/deletepoi" method="delete")
         fieldset
           .form-group.row.mb-1
-            label.col-sm-2.col-form-label(for="poiname") Enter POI Name you want to totally destroy once and for all.
+            label.col-sm-2.col-form-label(for="poiname") Name des zu löschenden Gebirges eingeben.
             .col-sm-6
-              input#poiname.form-control(type="text" name="pname" placeholder="Enter POI Name")
+              input#poiname.form-control(type="text" name="pname" placeholder="Name eingeben")
           .form-group.row.mb-1
            button.btn.btn-primary.mb-3(type="submit")#loeschknopf Send 
 
