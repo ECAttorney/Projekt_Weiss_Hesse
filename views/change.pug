@@ -7,12 +7,12 @@ block content
   // adapter from https://getbootstrap.com/docs/4.0/components/forms/#horizontal-form
   .container
     .row.justify-content-md-center
-      form(action="/change/deletepoi" method="delete")
+      form(action="/change/deleteOne" method="delete")
         fieldset
           .form-group.row.mb-1
             label.col-sm-2.col-form-label(for="poiname") Name des zu löschenden Gebirges eingeben.
             .col-sm-6
-              input#poiname.form-control(type="text" name="pname" placeholder="Name eingeben")
+              input#poiname.form-control(type="text" name="_id" placeholder="Name eingeben")
           .form-group.row.mb-1
            button.btn.btn-primary.mb-3(type="submit")#loeschknopf Send 
 

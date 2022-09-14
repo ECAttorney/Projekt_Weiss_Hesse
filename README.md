@@ -5,7 +5,7 @@ Ziel : Eine kartenbasierte Website, in der man Gebirge innerhalb Europas verwalt
 
 Server starten:
 - npm install 
-- nodemon exec npm start
+- npm start
 - MongoDB starten
 
 Das Bearbeiten und Löschen von Einträgen in der Datenbank funktioniert leider nicht (Versuche sind im Code zu erkennen).
