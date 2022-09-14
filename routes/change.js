@@ -10,7 +10,7 @@ const collectionName = 'gebirge' // collection name
 /* Addition home page. */
 router.get('/', function(req, res, next) 
 {
-  res.render('change', { title: 'SUPER DESTRUCTION Page' });
+  res.render('change', { title: 'Gebirge bearbeiten' });
 });
 
 /*  */

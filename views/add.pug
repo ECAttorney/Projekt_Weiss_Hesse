@@ -1,17 +1,7 @@
 extends layout
 
 block content
-  header
-    // add a bootstrap navbar
-    // Documentation about navbars at https://getbootstrap.com/docs/5.2/components/navbar/
-  nav#myfirstnavbar.navbar.navbar-expand-md.navbar-dark.bg-primary.mb-4
-    .container-fluid
-      a.navbar-brand(href='#')= title
-      i.bi.bi-camera.me-3
-      button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#navbarCollapse' aria-controls='navbarCollapse' aria-expanded='false' aria-label='Toggle navigation')
-        span.navbar-toggler-icon
-
-  h3 Welcome to the #{title}
+  h1= title
   br
   br 
   // adapter from https://getbootstrap.com/docs/4.0/components/forms/#horizontal-form
@@ -35,7 +25,7 @@ block content
   #navbarMenu.collapse.navbar-collapse
     a.button-4(href="/", role="button") Startseite
     |  
-    a.button-3(href="/add", role="button") Hinzufügen
+    a.button-3(href="/change", role="button") Bearbeiten
     |  
     a.button-3(href="/search", role="button") Route Berechnen
     |  

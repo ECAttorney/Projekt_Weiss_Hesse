@@ -3,6 +3,38 @@
 let uploadfield = document.getElementById("uploadfield")
 let inputJson = document.getElementById('inputJson');
 let textarea = document.getElementById('textarea');
+let bergtabelle = document.getElementById('myTableData');
+
+
+function addRowHandlers() {
+    var rows = bergtabelle.getElementsByTagName("tr");
+    for (i = 0; i < rows.length; i++) {
+        var currentRow = bergtabelle.rows[i];
+        var helper = function (row) {
+        return function () {
+          var y = row.getElementsByTagName("td")[2].innerHTML;
+          var x = row.getElementsByTagName("td")[1].innerHTML;
+          map.setView([x, y], 8);
+        };
+      };
+  
+      currentRow.onclick = helper(currentRow);
+    }
+  }
+  if(bergtabelle !== null){window.onload = addRowHandlers();}
+  /** 
+for(let i = 0; i < bergtabelle.length; i++){
+    let row = document.createElement('tr');
+    
+    if("<br><b>Name:</b>"+ row.bergname 
+    +"<br><b>Koordinaten:</b>" + row.bergkoordinaten
+    +"<br><b>Höhe:</b>" + row.berghoehe
+    +"<br><b>Link:</b>" + row.berglink
+    +"<br><b>Beschreibung:</b>" + row.bergbeschreibung === map._layers[i]._popup._content){
+    row.addEventListener('mouseover', function() {console.log(map._layers[i]._popup._content);});
+}
+}
+*/
 /** 
 let loeschen = document.getElementById('loeschknopf');
 
@@ -96,25 +128,6 @@ function isJsonString(str) {
                 return true;
 
 }
-
-function addMarker(point){
-
-    let x = point.geometry.coordinates[1];
-    let y = point.geometry.coordinates[0];
-    
-    var marker = L.marker([x, y]).addTo(map);
-    marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
-}
-        
-            function addMarker(point){
-
-                let x = point.geometry.coordinates[1];
-                let y = point.geometry.coordinates[0];
-            
-                var marker = L.marker([x, y]).addTo(map);
-                marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
-            }
-
             function addRow() {
           
                 var myName = document.getElementById("name");

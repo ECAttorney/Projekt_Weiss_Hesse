@@ -1,0 +1,20 @@
+version: "3.7"
+services:
+  app:
+    container_name: abschlussprojekt
+    build: .
+    image: darianwwu/projekt_weiss_hesse
+    ports:
+      - 3000:3000 # forward webserver on 5000-http port
+    depends_on:
+      - mongo
+    networks:
+      - default
+
+  mongoservice:
+    container_name: mongo 
+    image: mongo # image retrieved from docker hub
+    ports:
+      - '27017:27017'
+    volumes:
+      - ./mongo-volume:/data/db

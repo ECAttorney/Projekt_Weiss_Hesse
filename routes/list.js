@@ -20,7 +20,10 @@ router.get('/', function (req, res, next) {
     collection.find({}).toArray(function (err, docs) {
       assert.equal(err, null);
       console.log('Found the following records...');
-      res.render('list', { title: 'Liste von Gebirgen', data: docs });
+      res.render('list', {
+        title: 'Liste von Gebirgen',
+        data: docs
+      });
 
     })
 

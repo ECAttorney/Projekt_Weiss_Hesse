@@ -1,6 +1,7 @@
 extends layout
 
 block content
+  h1= title
   #map
   script.
     mapboxgl.accessToken = 'pk.eyJ1IjoiZHdlaXNzd3d1IiwiYSI6ImNsM2lodm83YjA3YmUzam83djZxb2p5amcifQ.4MjT-si3woW0JUIrZ9Jv6A';
@@ -16,8 +17,6 @@ block content
     }),
     'top-left'
     );
-
-  h1= title
   hr
   input#location(type="submit", name="location", value="Standort bestimmen")
   input#longcor(type="text" readonly)

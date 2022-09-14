@@ -23,7 +23,9 @@ block content
         td
           b Name
         td
-          b Koordinaten
+          b KoordinatenLat
+        td
+          b KoordinatenLon
         td
           b Höhe
         td
@@ -31,6 +33,7 @@ block content
         td
           b Beschreibung   
   script.
+    
     var map = L.map("map").setView([49.845363, 9.905964], 4);
     let a = "bdbdb"
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -38,28 +41,15 @@ block content
       attribution: '© OpenStreetMap'
       }).addTo(map);
     let geojson = !{JSON.stringify(data)}
-    function addMarker(point){
-
-    let x = point.geometry.coordinates[1];
-    let y = point.geometry.coordinates[0];
-    
-    var marker = L.marker([x, y]).addTo(map);
-    marker.bindPopup("<br><b>Name:</b>"+ bergname 
-    +"<br><b>Koordinaten:</b>" + bergkoordinaten
-    +"<br><b>Höhe:</b>" + berghoehe
-    +"<br><b>Link:</b>" + berglink
-    +"<br><b>Beschreibung:</b>" + bergbeschreibung
-    ).openPopup();
-    }
-        
 
     for(var i=0; i<geojson.length; i++)
     {
     console.log(geojson[i].geometry.coordinates)
-    addMarker(geojson[i])
+    
     console.log(geojson[i])
     var bergname = geojson[i].properties.name 
-    var bergkoordinaten = geojson[i].geometry.coordinates
+    var bergkoordinatenlat = geojson[i].geometry.coordinates[1]
+    var bergkoordinatenlon = geojson[i].geometry.coordinates[0]
     var berghoehe = geojson[i].properties.altitude
     var berglink = geojson[i].properties.url
     var bergbeschreibung = geojson[i].properties.description
@@ -70,12 +60,31 @@ block content
              
    
     row.insertCell(0).innerHTML= bergname;
-    row.insertCell(1).innerHTML= bergkoordinaten;
-    row.insertCell(2).innerHTML= berghoehe;
-    row.insertCell(3).innerHTML= berglink;
-    row.insertCell(4).innerHTML= bergbeschreibung;
+    row.insertCell(1).innerHTML= bergkoordinatenlat;
+    row.insertCell(2).innerHTML= bergkoordinatenlon;
+    row.insertCell(3).innerHTML= berghoehe;
+    row.insertCell(4).innerHTML= berglink;
+    row.insertCell(5).innerHTML= bergbeschreibung;
+    addMarker(geojson[i])
+     }
+    function addMarker(point){
+
+    let x = point.geometry.coordinates[1];
+    let y = point.geometry.coordinates[0];
     
+    var marker = L.marker([x, y]).addTo(map);
+    marker.bindPopup("<br><b>Name:</b>"+ bergname 
+    +"<br><b>KoordinatenLat:</b>" + bergkoordinatenlat
+    +"<br><b>KoordinatenLon:</b>" + bergkoordinatenlon
+    +"<br><b>Höhe:</b>" + berghoehe
+    +"<br><b>Link:</b>" + berglink
+    +"<br><b>Beschreibung:</b>" + bergbeschreibung
+    ).openPopup();
     }
+        
+
+    
+   
 
 
         

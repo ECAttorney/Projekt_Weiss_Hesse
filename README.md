@@ -3,39 +3,19 @@ Abgabe für das Abschlussprojekt in Geosoftware 1 SoSe 2022 von Darian Weiss und
 
 Ziel : Eine kartenbasierte Website, in der man Gebirge innerhalb Europas verwalten kann.
 
-Funktionen dieser Seite:
-      
-      - Speichern, bearbeiten, hinzufügen und löschen von Gebirgen
-      
-                  - Gebirge werden mittels einer geojson datei als Textfeld oder per Datei
-                              - Fehlerüberprüfung machen, ob diese Datei valide ist
-                              - Diese Gebirge sollen dann mittels Leaflet Draw auf der Karte hinzugefügt werden (entweder Punkt oder Polygon, aber würde sagen wir nehmen Punkte)
-                              
-                  - Attribute sollen über ein Formular(?) angegeben werden und als Popup angezeigt werden.
-                              - Die Attribute sind Name, Höhe, Wikipedia URL, Beschreibung
-                                      - Die Beschreibung soll mittels Wikipedia API rausgesnipped werden. Falls es keine Beschreibung bzw. Artikel gibt: "keine Information vorhanden"
-                  
-                  - Gebirge in MongoDB speichern und diese sollen bearbeitbar sein
-                                      
-                                      
-      - Infos über diese Anzeigen
-      
-      - Alle Gebirge als Tabelle anzeigen können
-      
-                  - HTML-List oder HTML-Tabelle
-                  - Wenn man in der Liste/Tabelle über das Gebirge hovert, soll dieses auf der Karte hervorgehoben werden
-                  
-      - Route berechenen von einem Standort zum Gebirge
-                  
-                  - Gibt es ne API in der Aufgabe
-                  - Layer benötigt
-                  
-      - Layout/Design
-      
-                  - Startseite mit Erklärung und Impressum
-                  - Gut lesbar für Handys
-                  
-      - KP OB OPTIONAL
-      
-                  - Wetterverhältnisse anzeigen für Gebirge
-                  - Knopf "Wetterverhältnisse anzeigen" mit OpenWeather API
+Server starten:
+- npm install 
+- nodemon exec npm start
+- MongoDB starten
+
+Das Bearbeiten und Löschen von Einträgen in der Datenbank funktioniert leider nicht (Versuche sind im Code zu erkennen).
+Die Wikipedia-API ist nicht richtig eingebunden, die BEschreibung wird nicht automatisch angepasst (Versuche sind im Code zu erkennen).
+Die Mapbox Directions API ist auf der "Route Berechnen" Seite eingebunden, aber nicht angepasst.
+
+Das Hinzufügen von Einträgen in die Datenbank funktioniert sowohl per Textfeld als auch per Upload.
+Das Anzeigen aller Einträge funktioniert als Tabellenform und mit Popups auf der Karte.
+Durch Klicken auf eine Zeile in der Tabelle wird der Kartenausschnitt auf den entsprechenden Bereich gezoomed.
+Das  Navigieren zwischen verschiedenen Seiten funktioniert übder die Buttons unten.
+
+Ohne Docker funktioniert die Anwendung, wenn man die Webseite per Docker startet, sind nicht alle Funktionen und Seiten aufrufbar.
+            wir vermuten es liegt an den async await functions
