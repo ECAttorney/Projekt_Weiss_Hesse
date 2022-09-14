@@ -53,6 +53,7 @@ async function addNewPOItoDB(client, dbName, collectionName, poi, res) {
   })
 
 }
+
 function isValidHttpUrl(string) {
   let url;
 
@@ -79,7 +80,7 @@ function getWikipediaDescription(url) {
     // wenn ja
     let urlArray = url.split("/");
     let title = urlArray[urlArray.length - 1];
-    
+
     // with help from: https://www.youtube.com/watch?v=yqwHxAH1xrw
     axios.get(
       "https://de.wikipedia.org/w/api.php?format=json&exintro=1&action=query&prop=extracts&explaintext=1&exsentences=1&origin=*&titles=" + title
